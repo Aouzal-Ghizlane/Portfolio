@@ -1,0 +1,2152 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark" data-color="violet">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Aouzal Ghizlane — Software Engineer à Casablanca. Java, Spring Boot, Angular, Python et intégration IA.">
+<title>Aouzal Ghizlane | Software Engineer</title>
+
+<script>
+try {
+  const t = localStorage.getItem("ag-theme");
+  const c = localStorage.getItem("ag-color");
+  if (["light","dark"].includes(t))
+    document.documentElement.dataset.theme = t;
+  if (["violet","blue","green"].includes(c))
+    document.documentElement.dataset.color = c;
+} catch {}
+</script>
+
+<style>
+/* THÈMES */
+:root{
+  color-scheme:dark;
+  --bg:#0c0e18;--surface:#151927;--surface2:#1c2234;
+  --text:#f1f3fc;--muted:#a5aec5;--line:#293148;
+  --accent:#b89aff;--ink:#24133d;--soft:#b89aff12;--glow:#b89aff20;
+  --header:#0c0e18ed;--shadow:0 25px 75px #00000025;
+}
+[data-theme="light"]{
+  color-scheme:light;
+  --bg:#f7f8fc;--surface:#fff;--surface2:#eef0f8;
+  --text:#20263a;--muted:#626e85;--line:#dfe3ef;
+  --accent:#7446d1;--ink:#fff;--soft:#7446d10c;--glow:#7446d116;
+  --header:#f7f8fced;--shadow:0 25px 75px #26345c0b;
+}
+[data-color="blue"]{
+  --accent:#8cc4ff;--ink:#142b45;--soft:#8cc4ff12;--glow:#8cc4ff20;
+}
+[data-theme="light"][data-color="blue"]{
+  --accent:#2864cf;--ink:#fff;--soft:#2864cf0c;--glow:#2864cf16;
+}
+[data-color="green"]{
+  --accent:#8bdfbd;--ink:#123d2c;--soft:#8bdfbd12;--glow:#8bdfbd20;
+}
+[data-theme="light"][data-color="green"]{
+  --accent:#147c58;--ink:#fff;--soft:#147c580c;--glow:#147c5816;
+}
+
+/* BASE */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:115px}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,"Segoe UI",system-ui,sans-serif;line-height:1.7;
+}
+body.modal-open{overflow:hidden}
+button{font:inherit;cursor:pointer}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+h1,h2,h3,h4{line-height:1.18;margin-top:0}
+p{margin-top:0;color:var(--muted)}
+::selection{background:var(--accent);color:var(--ink)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:5px}
+[hidden]{display:none!important}
+.container{width:min(1160px,90%);margin:auto}
+.section{padding:85px 0}
+.accent{color:var(--accent)}
+.mono{font-family:ui-monospace,Consolas,monospace}
+.icon{
+  width:21px;height:21px;fill:none;stroke:currentColor;
+  stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;
+}
+.eyebrow{
+  display:flex;align-items:center;gap:10px;color:var(--accent);
+  font:600 .72rem ui-monospace,monospace;
+  text-transform:uppercase;letter-spacing:.12em;
+}
+.eyebrow:before{content:"";width:24px;height:1px;background:currentColor}
+.section-head{max-width:650px;margin-bottom:35px}
+.section-head h2{
+  margin:16px 0;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.05em;
+}
+.section-head p{margin-bottom:0}
+.button{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:12px 20px;border:1px solid var(--line);border-radius:12px;
+  color:var(--text);background:var(--surface);font-size:.85rem;font-weight:650;
+  transition:transform .2s,border-color .2s;
+}
+.button:hover{transform:translateY(-3px);border-color:var(--accent)}
+.primary{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.actions,.tags{display:flex;flex-wrap:wrap;gap:9px}
+.tag{
+  padding:5px 10px;border:1px solid var(--line);border-radius:7px;
+  background:var(--soft);color:var(--muted);font-size:.71rem;
+}
+.card{
+  padding:28px;border:1px solid var(--line);
+  border-radius:22px;background:var(--surface);
+}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+.skip{position:fixed;top:-100px;left:15px;z-index:100}
+.skip:focus{top:15px}
+
+/* NAVIGATION */
+header{
+  position:sticky;top:0;z-index:30;background:var(--header);
+  backdrop-filter:blur(18px);border-bottom:1px solid var(--line);
+}
+.nav{
+  min-height:82px;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;
+}
+.brand{
+  display:flex;align-items:center;gap:10px;font-size:1.05rem;
+  font-weight:800;letter-spacing:-.04em;white-space:nowrap;
+}
+.brand-mark{
+  width:36px;height:36px;display:grid;place-items:center;
+  border-radius:11px;background:var(--accent);color:var(--ink);font-size:.8rem;
+}
+.nav-links{display:flex;align-items:center;gap:20px}
+.nav-links a{font-size:.78rem;color:var(--muted)}
+.nav-links a:hover{color:var(--accent)}
+.settings{display:flex;align-items:center;gap:13px}
+.colors{display:flex;gap:8px;border:0;padding:0;margin:0}
+.swatch{
+  width:14px;height:14px;padding:0;border:0;border-radius:50%;
+  background:var(--swatch);
+}
+.swatch[aria-pressed="true"]{outline:1px solid var(--text);outline-offset:4px}
+.icon-btn{
+  width:37px;height:37px;display:inline-grid;place-items:center;
+  border:1px solid var(--line);border-radius:10px;
+  background:var(--surface);color:var(--text);
+}
+.menu-btn{display:none}
+
+/* ACCUEIL */
+.hero-wrap{
+  overflow:hidden;
+  background:radial-gradient(ellipse at 95% 10%,var(--glow),transparent 55%);
+}
+.hero{
+  display:grid;grid-template-columns:1.05fr 1fr;align-items:center;
+  gap:60px;padding:95px 0 75px;
+}
+.location{
+  display:inline-flex;align-items:center;gap:7px;padding:6px 12px;
+  border:1px solid var(--line);border-radius:30px;
+  background:var(--surface);color:var(--muted);font-size:.73rem;
+}
+.location .icon{width:15px;height:15px;color:var(--accent)}
+.hello{margin:26px 0 12px}
+h1{
+  font-size:clamp(3.2rem,6vw,5.3rem);line-height:1.02;
+  letter-spacing:-.065em;margin-bottom:22px;
+}
+.hero-role{font-size:1.25rem;font-weight:650;color:var(--text)}
+.hero-description{max-width:510px;font-size:.94rem}
+.hero .actions{margin-top:28px}
+.hero-stack{
+  display:flex;align-items:center;gap:12px;margin-top:25px;
+  color:var(--muted);font-size:.73rem;
+}
+.mini-logos{display:flex}
+.mini-logos span{
+  display:grid;place-items:center;width:33px;height:33px;
+  margin-left:-6px;border:2px solid var(--bg);border-radius:50%;background:#fff;
+}
+.mini-logos span:first-child{margin-left:0}
+.mini-logos img{width:20px;height:20px;object-fit:contain}
+.visual{position:relative;min-width:0;padding:15px 0}
+.editor{
+  overflow:hidden;border:1px solid var(--line);border-radius:19px;
+  background:var(--surface);box-shadow:var(--shadow);transform:rotate(-2deg);
+}
+.editor-top{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 18px;border-bottom:1px solid var(--line);
+  font-size:.7rem;color:var(--muted);
+}
+.dots{display:flex;gap:6px}
+.dots i{width:9px;height:9px;border-radius:50%;background:#ef7c83}
+.dots i:nth-child(2){background:#e7c171}
+.dots i:nth-child(3){background:#79cca1}
+.editor-tab{
+  display:inline-flex;align-items:center;gap:8px;padding:12px 19px;
+  border-bottom:2px solid var(--accent);color:var(--accent);font-size:.73rem;
+}
+.editor-tab img{width:17px;height:17px}
+pre{padding:22px;margin:0;overflow:auto;font:.76rem/1.95 ui-monospace,Consolas,monospace}
+pre code{font-family:inherit}
+.key{color:var(--accent)}
+.string{color:#88d3af}
+[data-theme="light"] .string{color:#267653}
+.comment{color:var(--muted)}
+.editor-bottom{
+  display:flex;justify-content:space-between;gap:10px;padding:11px 17px;
+  border-top:1px solid var(--line);font-size:.65rem;color:var(--muted);
+}
+.floating-note{
+  position:absolute;right:-10px;bottom:-5px;
+  display:flex;align-items:center;gap:12px;padding:13px 17px;
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:14px;box-shadow:var(--shadow);transform:rotate(3deg);
+}
+.floating-note .icon{color:var(--accent);width:26px;height:26px}
+.floating-note strong{display:block;font-size:.79rem}
+.floating-note small{font-size:.7rem;color:var(--muted)}
+.expertise{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  overflow:hidden;border:1px solid var(--line);border-radius:18px;
+  background:var(--surface);margin-bottom:10px;
+}
+.expertise-item{display:flex;align-items:center;gap:13px;padding:22px}
+.expertise-item+.expertise-item{border-left:1px solid var(--line)}
+.expertise-item .icon{color:var(--accent)}
+.expertise-item strong{display:block;font-size:.8rem}
+.expertise-item small{color:var(--muted);font-size:.71rem}
+
+/* À PROPOS */
+.about-grid{display:grid;grid-template-columns:.85fr 1.3fr;gap:45px;align-items:center}
+.identity{
+  background:radial-gradient(circle at 100% 0,var(--glow),transparent 65%),var(--surface);
+}
+.identity-top{display:flex;justify-content:space-between;color:var(--muted);font-size:.7rem}
+.monogram{
+  display:grid;place-items:center;width:110px;height:110px;margin:35px 0 25px;
+  border:1px solid var(--accent);border-radius:28px;background:var(--soft);
+  color:var(--accent);font-size:2.9rem;font-weight:800;letter-spacing:-.08em;
+  transform:rotate(-6deg);
+}
+.identity h3{font-size:1.5rem;letter-spacing:-.04em;margin-bottom:8px}
+.identity p{font-size:.85rem}
+.identity-bottom{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  border-top:1px solid var(--line);padding-top:20px;margin-top:25px;
+  color:var(--muted);font-size:.73rem;
+}
+.about-copy h3{font-size:1.4rem;letter-spacing:-.03em}
+.about-copy p{font-size:.92rem}
+.details{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:25px 0}
+.details dt{font-size:.71rem;color:var(--muted)}
+.details dd{margin:4px 0 0;font-size:.81rem;overflow-wrap:anywhere}
+
+/* COMPÉTENCES */
+.skills-section{
+  background:var(--surface);border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.skills-layout{display:grid;grid-template-columns:.7fr 1.4fr;gap:50px}
+.skill-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.skill{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:13px;min-height:137px;padding:18px 10px;text-align:center;
+  border:1px solid var(--line);border-radius:16px;background:var(--bg);
+  transition:transform .2s,border-color .2s;
+}
+.skill:hover{transform:translateY(-5px);border-color:var(--accent)}
+.skill-logo{
+  display:grid;place-items:center;width:57px;height:57px;
+  padding:10px;border-radius:15px;background:#fff;
+}
+.skill-logo img{width:100%;height:100%;object-fit:contain}
+.skill span{font-size:.76rem;font-weight:600}
+.practices{margin-top:20px}
+
+/* ENTREPRISES ET EXPÉRIENCE */
+.experience-layout{display:grid;grid-template-columns:.6fr 1.4fr;gap:45px}
+.timeline{display:grid;gap:23px;border-left:1px solid var(--line);padding-left:26px;margin-left:6px}
+.job{position:relative}
+.job:before{
+  content:"";position:absolute;left:-33px;top:35px;width:11px;height:11px;
+  border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px var(--bg);
+}
+.job-top{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.company-logo{
+  display:grid;place-items:center;flex-shrink:0;
+  width:87px;height:65px;padding:8px;border-radius:12px;
+  background:#fff;border:1px solid #e5e7ef;
+}
+.company-logo img{width:100%;height:100%;object-fit:contain}
+.company-logo.intelcia{background:#080808;border-color:#282828}
+.company-logo.sfr{
+  background:#e80024;border-color:#e80024;color:#fff;
+  font-size:1.25rem;font-weight:850;letter-spacing:-.06em;
+}
+.job-top h3{font-size:1.02rem;margin:0 0 6px}
+.company-name{margin:0;color:var(--accent);font-size:.85rem}
+.date{font-size:.7rem;color:var(--muted)}
+.job ul{padding-left:18px;color:var(--muted);font-size:.85rem;margin:18px 0 22px}
+.job li+li{margin-top:8px}
+
+/* PROJETS */
+.projects-top{
+  display:flex;justify-content:space-between;align-items:end;
+  gap:25px;margin-bottom:35px;
+}
+.projects-top .section-head{margin-bottom:0}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter{
+  padding:8px 15px;border:1px solid var(--line);border-radius:25px;
+  background:var(--surface);color:var(--muted);font-size:.74rem;
+}
+.filter[aria-pressed="true"]{
+  background:var(--accent);color:var(--ink);border-color:var(--accent);
+}
+.project-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.project{
+  display:flex;flex-direction:column;min-width:0;overflow:hidden;
+  border:1px solid var(--line);border-radius:22px;background:var(--surface);
+  transition:transform .25s,border-color .25s,box-shadow .25s;
+}
+.project:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:var(--shadow)}
+.project-image{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  width:100%;height:260px;padding:20px;border:0;
+  border-bottom:1px solid var(--line);overflow:hidden;background:#e5edf8;
+}
+.project-image.mobile{background:linear-gradient(140deg,#f6d8e4,#e5def5)}
+.project-image.face{background:linear-gradient(140deg,#d0def5,#e9edf8)}
+.project-image.docker{background:linear-gradient(140deg,#c8eaf5,#e4edf7)}
+.project-image img{
+  width:100%;height:100%;object-fit:contain;
+  filter:drop-shadow(0 8px 14px #182a4020);transition:transform .3s;
+}
+.project-image.mobile img{width:auto;max-width:100%;border-radius:12px}
+.project:hover .project-image img{transform:scale(1.035)}
+.zoom{
+  display:grid;place-items:center;position:absolute;bottom:12px;right:12px;
+  width:33px;height:33px;border-radius:10px;background:#fffffff0;color:#30384c;
+}
+.project-content{display:flex;flex:1;flex-direction:column;padding:24px}
+.project-type{
+  display:flex;justify-content:space-between;margin-bottom:16px;
+  color:var(--accent);font-size:.64rem;letter-spacing:.07em;text-transform:uppercase;
+}
+.project-title{display:flex;align-items:center;gap:9px;margin-bottom:15px}
+.project-title .icon{color:var(--accent)}
+.project-title h3{font-size:1.1rem;margin:0;letter-spacing:-.03em}
+.project-content p{font-size:.84rem;margin-bottom:20px}
+.project-content .tags{margin-top:auto}
+.project-footer{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  border-top:1px solid var(--line);margin-top:22px;padding-top:17px;
+}
+.gallery-button{
+  display:flex;align-items:center;gap:7px;border:0;padding:0;background:none;
+  color:var(--accent);font-size:.79rem;font-weight:650;
+}
+.gallery-button .icon{width:16px;height:16px}
+.project-footer small{color:var(--muted);font-size:.67rem}
+.missing{padding:15px;text-align:center;color:#35405b;font-size:.8rem;overflow-wrap:anywhere}
+
+/* FORMATION */
+.learning-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.panel-title{
+  display:flex;align-items:center;gap:12px;padding-bottom:22px;
+  margin-bottom:23px;border-bottom:1px solid var(--line);
+}
+.panel-title .icon{color:var(--accent)}
+.panel-title h3{margin:0;font-size:1.05rem}
+.education+.education,.certificate+.certificate{
+  border-top:1px solid var(--line);padding-top:22px;margin-top:22px;
+}
+.education h4,.certificate h4{font-size:.92rem;margin:7px 0}
+.education p,.certificate p{font-size:.79rem;margin:0}
+.certificate{display:flex;align-items:center;gap:14px}
+.cert-logo{
+  width:46px;height:46px;flex-shrink:0;display:grid;place-items:center;
+  padding:8px;border-radius:12px;background:#fff;
+}
+.cert-logo img{width:100%;height:100%;object-fit:contain}
+.cert-logo.security{background:var(--soft);color:var(--accent)}
+
+/* CONTACT */
+.contact-card{
+  display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:45px;
+  padding:50px;border:1px solid var(--line);border-radius:26px;
+  background:radial-gradient(circle at 0 100%,var(--glow),transparent 65%),var(--surface);
+}
+.contact-card h2{font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-.05em;margin:18px 0}
+.contact-card p{font-size:.88rem;margin-bottom:0}
+.contact-links{display:grid;gap:12px}
+.contact-link{
+  display:flex;align-items:center;gap:13px;padding:16px;
+  border:1px solid var(--line);border-radius:14px;background:var(--bg);
+}
+.contact-link:hover{border-color:var(--accent)}
+.contact-link>.icon{color:var(--accent)}
+.contact-link div{min-width:0;flex:1}
+.contact-link small{display:block;font-size:.67rem;color:var(--muted)}
+.contact-link strong{font-size:.77rem;overflow-wrap:anywhere;font-weight:600}
+footer{border-top:1px solid var(--line);padding:27px 0}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+footer p,footer .back{margin:0;color:var(--muted);font-size:.73rem}
+
+/* GALERIE */
+dialog{
+  width:min(1100px,95vw);max-height:94dvh;padding:0;overflow:auto;
+  border:1px solid var(--line);border-radius:20px;
+  background:var(--surface);color:var(--text);box-shadow:0 30px 100px #0008;
+}
+dialog::backdrop{background:#070b16dc;backdrop-filter:blur(8px)}
+.dialog-head{
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:16px 20px;border-bottom:1px solid var(--line);
+}
+.dialog-head h2{margin:0;font-size:1rem}
+.gallery-figure{margin:0;padding:20px;background:var(--bg)}
+.gallery-figure img{width:100%;height:min(64dvh,650px);object-fit:contain}
+.gallery-figure figcaption{text-align:center;padding-top:14px;color:var(--muted);font-size:.78rem}
+.gallery-controls{display:flex;align-items:center;justify-content:center;gap:20px;padding:16px}
+.gallery-controls span{font-size:.78rem;color:var(--muted)}
+.icon-btn:disabled{opacity:.35;cursor:default}
+
+/* RESPONSIVE */
+@media(max-width:1080px){
+  .nav{flex-wrap:wrap;padding:15px 0;gap:17px}
+  .nav-links{order:3;width:100%;justify-content:center}
+  .hero{gap:30px}
+  .skills-layout,.experience-layout{grid-template-columns:1fr;gap:30px}
+  .skill-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .projects-top{flex-direction:column;align-items:start}
+  .project-grid{gap:15px}
+  .project-content{padding:20px}
+}
+@media(max-width:780px){
+  .section{padding:60px 0}
+  .menu-btn{display:inline-grid}
+  .nav-links{display:none;flex-wrap:wrap;gap:17px;padding:12px 0}
+  .nav-links.open{display:flex}
+  .settings{margin-left:auto}
+  .hero{grid-template-columns:1fr;padding:60px 0;gap:35px}
+  .visual{width:100%;max-width:560px;margin:auto}
+  .editor{transform:none}
+  .floating-note{right:0}
+  .expertise{grid-template-columns:1fr}
+  .expertise-item+.expertise-item{border-left:0;border-top:1px solid var(--line)}
+  .about-grid,.project-grid,.learning-grid,.contact-card{grid-template-columns:1fr}
+  .skill-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .project-image{height:300px}
+  .project-image.mobile{height:340px}
+  .contact-card{padding:28px;gap:28px}
+  .footer-inner{justify-content:center;text-align:center}
+}
+@media(max-width:430px){
+  .brand{font-size:.9rem}
+  .brand-mark{width:31px;height:31px}
+  .settings{gap:10px}
+  .swatch{width:11px;height:11px}
+  .icon-btn{width:33px;height:33px}
+  .details{grid-template-columns:1fr}
+  .card{padding:23px}
+  .company-logo{width:72px;height:60px}
+  pre{font-size:.66rem;padding:17px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*:before,*:after{transition:none!important;animation:none!important}
+  .button:hover,.skill:hover,.project:hover,.project:hover .project-image img{transform:none}
+}
+/* SÉLECTEUR FR / EN */
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.language-button {
+  min-width: 34px;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted);
+  font-size: .71rem;
+  font-weight: 750;
+  line-height: 1.5;
+  transition: background .2s, color .2s;
+}
+
+.language-button:hover {
+  color: var(--text);
+}
+
+.language-button[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+/* Éviter que les boutons débordent sur téléphone. */
+@media (max-width: 480px) {
+  .nav {
+    gap: 12px;
+  }
+
+  .settings {
+    gap: 9px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .language-button {
+    min-width: 29px;
+    padding: 4px 6px;
+    font-size: .67rem;
+  }
+
+  .colors {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 360px) {
+  .settings {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ICÔNES SVG INTÉGRÉES -->
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0"
+     style="position:absolute;overflow:hidden" aria-hidden="true">
+<defs>
+  <symbol id="code" viewBox="0 0 24 24">
+    <path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16"/>
+  </symbol>
+  <symbol id="arrow" viewBox="0 0 24 24">
+    <path d="M7 17 17 7M7 7h10v10"/>
+  </symbol>
+  <symbol id="mail" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="14" rx="3"/>
+    <path d="m3 7 9 6 9-6"/>
+  </symbol>
+  <symbol id="linkedin" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="18" height="18" rx="3"/>
+    <path d="M7 10v7m0-10v.1M11 17v-7m0 3a3 3 0 0 1 6 0v4"/>
+  </symbol>
+  <symbol id="pin" viewBox="0 0 24 24">
+    <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/>
+    <circle cx="12" cy="10" r="3"/>
+  </symbol>
+  <symbol id="sun" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="4"/>
+    <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>
+  </symbol>
+  <symbol id="moon" viewBox="0 0 24 24">
+    <path d="M21 13A9 9 0 0 1 11 3a9 9 0 1 0 10 10Z"/>
+  </symbol>
+  <symbol id="menu" viewBox="0 0 24 24">
+    <path d="M4 6h16M4 12h16M4 18h16"/>
+  </symbol>
+  <symbol id="close" viewBox="0 0 24 24">
+    <path d="m6 6 12 12M6 18 18 6"/>
+  </symbol>
+  <symbol id="ai" viewBox="0 0 24 24">
+    <rect x="6" y="6" width="12" height="12" rx="3"/>
+    <path d="M9 2v4m6-4v4M9 18v4m6-4v4M2 9h4m-4 6h4m12-6h4m-4 6h4M10 10h4v4h-4z"/>
+  </symbol>
+  <symbol id="layers" viewBox="0 0 24 24">
+    <path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/>
+  </symbol>
+  <symbol id="flow" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="6" height="6" rx="1"/>
+    <rect x="15" y="15" width="6" height="6" rx="1"/>
+    <path d="M9 6h6a3 3 0 0 1 3 3v6M15 18H9a3 3 0 0 1-3-3V9"/>
+  </symbol>
+  <symbol id="phone" viewBox="0 0 24 24">
+    <rect x="6" y="2" width="12" height="20" rx="3"/>
+    <path d="M10 18h4"/>
+  </symbol>
+  <symbol id="face" viewBox="0 0 24 24">
+    <path d="M8 3H3v5m13-5h5v5M3 16v5h5m8 0h5v-5"/>
+    <circle cx="12" cy="10" r="3"/>
+    <path d="M7 18a5 5 0 0 1 10 0"/>
+  </symbol>
+  <symbol id="box" viewBox="0 0 24 24">
+    <path d="m12 3 9 5-9 5-9-5 9-5ZM3 8v9l9 5 9-5V8M12 13v9M7.5 5.5l9 5"/>
+  </symbol>
+  <symbol id="zoom" viewBox="0 0 24 24">
+    <circle cx="10" cy="10" r="6"/>
+    <path d="m15 15 6 6M10 7v6M7 10h6"/>
+  </symbol>
+  <symbol id="graduate" viewBox="0 0 24 24">
+    <path d="m2 8 10-5 10 5-10 5L2 8Zm4 2v7c4 3 8 3 12 0v-7M22 8v9"/>
+  </symbol>
+  <symbol id="award" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="5"/>
+    <path d="m8 12-2 9 6-3 6 3-2-9"/>
+  </symbol>
+  <symbol id="shield" viewBox="0 0 24 24">
+    <path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z"/>
+    <path d="m8 12 3 3 5-6"/>
+  </symbol>
+  <symbol id="left" viewBox="0 0 24 24">
+    <path d="m14 6-6 6 6 6"/>
+  </symbol>
+  <symbol id="right" viewBox="0 0 24 24">
+    <path d="m10 6 6 6-6 6"/>
+  </symbol>
+</defs>
+</svg>
+
+<a href="#main" class="button primary skip">Aller au contenu</a>
+
+<!-- NAVIGATION -->
+<header>
+  <nav class="container nav" aria-label="Navigation principale">
+    <a href="#accueil" class="brand">
+      <span class="brand-mark">AG</span>
+      Ghizlane<span class="accent">AOUZAL</span>
+    </a>
+
+    <div class="nav-links" id="navigation">
+      <a href="#apropos">À propos</a>
+      <a href="#competences">Compétences</a>
+      <a href="#experience">Expérience</a>
+      <a href="#projets">Projets</a>
+      <a href="#formation">Formation</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div class="settings">
+<div class="language-switch" role="group" aria-label="Langue du site">
+  <button
+    type="button"
+    class="language-button"
+    data-language="fr"
+    lang="fr"
+    aria-label="Afficher le site en français"
+    aria-pressed="true"
+  >
+    FR
+  </button>
+
+  <button
+    type="button"
+    class="language-button"
+    data-language="en"
+    lang="en"
+    aria-label="Display the website in English"
+    aria-pressed="false"
+  >
+    EN
+  </button>
+</div>
+      <fieldset class="colors">
+        <legend class="sr-only">Couleur du portfolio</legend>
+        <button type="button" class="swatch" data-color-choice="violet"
+          style="--swatch:#b89aff" aria-label="Violet" aria-pressed="true"></button>
+        <button type="button" class="swatch" data-color-choice="blue"
+          style="--swatch:#8cc4ff" aria-label="Bleu" aria-pressed="false"></button>
+        <button type="button" class="swatch" data-color-choice="green"
+          style="--swatch:#8bdfbd" aria-label="Vert" aria-pressed="false"></button>
+      </fieldset>
+
+      <button type="button" class="icon-btn" id="theme-toggle"
+        aria-label="Passer au thème clair">
+        <svg class="icon" aria-hidden="true"><use id="theme-icon" href="#sun"></use></svg>
+      </button>
+
+      <button type="button" class="icon-btn menu-btn" id="menu-toggle"
+        aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navigation">
+        <svg class="icon" aria-hidden="true"><use href="#menu"></use></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main id="main">
+
+<!-- ACCUEIL -->
+<div class="hero-wrap" id="accueil">
+  <div class="container">
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <span class="location">
+          <svg class="icon" aria-hidden="true"><use href="#pin"></use></svg>
+          Casablanca, Maroc
+        </span>
+
+        <p class="hello">Bonjour, je suis</p>
+
+        <h1 id="hero-title">Aouzal<br><span class="accent">Ghizlane.</span></h1>
+
+        <p class="hero-role">
+          Software Engineer<br>Full Stack & intégration IA
+        </p>
+
+        <p class="hero-description">
+          Je transforme les besoins métier en applications utiles :
+          développement Java et Angular, modernisation de systèmes
+          et solutions intelligentes avec Python et le NLP.
+        </p>
+
+        <div class="actions">
+          <a class="button primary" href="#projets">
+            Découvrir mes projets
+            <svg class="icon" aria-hidden="true"><use href="#arrow"></use></svg>
+          </a>
+          <a class="button" href="#contact">
+            <svg class="icon" aria-hidden="true"><use href="#mail"></use></svg>
+            Me contacter
+          </a>
+        </div>
+
+        <div class="hero-stack">
+          <div class="mini-logos" aria-hidden="true">
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt=""></span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg" alt=""></span>
+            <span><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt=""></span>
+          </div>
+          Java · Spring Boot · Angular · Python
+        </div>
+      </div>
+
+      <div class="visual">
+        <div class="editor">
+          <div class="editor-top">
+            <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+            <span class="mono">ghizlane / workspace</span>
+          </div>
+          <div class="editor-tab mono">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="">
+            engineer.py
+          </div>
+          <pre><code><span class="key">class</span> SoftwareEngineer:
+    <span class="key">def</span> __init__(self):
+        self.name = <span class="string">"Aouzal Ghizlane"</span>
+        self.location = <span class="string">"Casablanca"</span>
+
+        self.stack = {
+            <span class="string">"backend"</span>: [
+                <span class="string">"Java"</span>, <span class="string">"Spring Boot"</span>
+            ],
+            <span class="string">"frontend"</span>: [<span class="string">"Angular"</span>],
+            <span class="string">"ai"</span>: [<span class="string">"Python"</span>, <span class="string">"NLP"</span>]
+        }
+
+    <span class="key">def</span> build(self):
+        <span class="key">return</span> <span class="string">"Ideas into applications."</span>
+
+<span class="comment"># Build. Modernize. Automate.</span></code></pre>
+          <div class="editor-bottom mono">
+            <span>● software + applied AI</span><span>UTF-8</span>
+          </div>
+        </div>
+
+        <div class="floating-note">
+          <svg class="icon" aria-hidden="true"><use href="#ai"></use></svg>
+          <div>
+            <strong>Du code à l'impact</strong>
+            <small>Applications métier & IA</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="expertise">
+      <div class="expertise-item">
+        <svg class="icon" aria-hidden="true"><use href="#layers"></use></svg>
+        <div><strong>Développement Full Stack</strong><small>Java, Spring Boot & Angular</small></div>
+      </div>
+      <div class="expertise-item">
+        <svg class="icon" aria-hidden="true"><use href="#ai"></use></svg>
+        <div><strong>Intelligence artificielle</strong><small>Python, NLP & recherche sémantique</small></div>
+      </div>
+      <div class="expertise-item">
+        <svg class="icon" aria-hidden="true"><use href="#flow"></use></svg>
+        <div><strong>Modernisation & automatisation</strong><small>Applications et processus métier</small></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- À PROPOS -->
+<section class="section" id="apropos">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">01 / Qui suis-je ?</span>
+      <h2>La technique au service<br>des <span class="accent">besoins réels.</span></h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="card identity">
+        <div class="identity-top mono">
+          <span>&lt; developer profile /&gt;</span>
+          <svg class="icon" aria-hidden="true"><use href="#code"></use></svg>
+        </div>
+        <div class="monogram" aria-hidden="true">AG</div>
+        <h3>Aouzal Ghizlane</h3>
+        <p>Ingénieure logiciel · Full Stack & AI</p>
+        <div class="tags">
+          <span class="tag">Télécommunications</span>
+          <span class="tag">Assurance</span>
+          <span class="tag">Applied AI</span>
+        </div>
+        <div class="identity-bottom">
+          <span>Casablanca, Maroc</span>
+          <svg class="icon" aria-hidden="true"><use href="#pin"></use></svg>
+        </div>
+      </div>
+
+      <div class="about-copy">
+        <h3>Construire, moderniser et simplifier.</h3>
+        <p>
+          Ingénieure logiciel full-stack, j'interviens sur le développement
+          et la modernisation d'applications d'entreprise dans les secteurs
+          des télécommunications et de l'assurance.
+        </p>
+        <p>
+          Mon travail associe développement Java/Spring Boot, interfaces
+          Angular, composants Oracle SQL/PLSQL et automatisation
+          des workflows métier.
+        </p>
+        <p>
+          Je travaille également sur l'IA appliquée : recherche sémantique
+          avec MiniLM et RoBERTa, analyse documentaire et intégration
+          de modèles via des API Flask.
+        </p>
+
+        <dl class="details">
+          <div><dt>Spécialité</dt><dd>Full Stack & intégration IA</dd></div>
+          <div><dt>Localisation</dt><dd>Casablanca, Maroc</dd></div>
+          <div>
+            <dt>Email</dt>
+            <dd><a href="mailto:ghizlaneaouzale12@gmail.com">ghizlaneaouzale12@gmail.com</a></dd>
+          </div>
+          <div><dt>Formation</dt><dd>Master en ingénierie informatique et Internet</dd></div>
+        </dl>
+
+        <a class="button" href="https://www.linkedin.com/in/aouzal-ghizlane"
+          target="_blank" rel="noopener noreferrer">
+          <svg class="icon" aria-hidden="true"><use href="#linkedin"></use></svg>
+          Mon profil LinkedIn
+          <svg class="icon" aria-hidden="true"><use href="#arrow"></use></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPÉTENCES AVEC LOGOS -->
+<section class="section skills-section" id="competences">
+  <div class="container skills-layout">
+    <div>
+      <div class="section-head">
+        <span class="eyebrow">02 / Ma boîte à outils</span>
+        <h2>Les technologies<br>que <span class="accent">j'utilise.</span></h2>
+        <p>
+          Du backend aux interfaces, des bases de données aux modèles d'IA :
+          une approche transversale du développement logiciel.
+        </p>
+      </div>
+      <div class="tags">
+        <span class="tag">Full Stack</span>
+        <span class="tag">NLP</span>
+        <span class="tag">API</span>
+        <span class="tag">Modernisation</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="skill-grid" id="skill-grid"></div>
+      <noscript><p>Java, Spring Boot, Angular, Python, Node.js, Django, Flask, Oracle, Git et SonarQube.</p></noscript>
+      <div class="tags practices">
+        <span class="tag">Agile</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">ITIL</span>
+        <span class="tag">UNIX Shell</span>
+        <span class="tag">MiniLM</span>
+        <span class="tag">RoBERTa</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPÉRIENCE AVEC LOGOS D'ENTREPRISE -->
+<section class="section" id="experience">
+  <div class="container experience-layout">
+    <div class="section-head">
+      <span class="eyebrow">03 / Mon parcours</span>
+      <h2>De l'expérience.<br>Des <span class="accent">contributions.</span></h2>
+      <p>
+        Des applications d'entreprise, des processus métier
+        et des solutions intelligentes.
+      </p>
+    </div>
+
+    <div class="timeline">
+      <article class="card job">
+        <div class="job-top">
+          <div class="company-logo intelcia">
+            <img src="images/intelcia.png" alt="Logo Intelcia" loading="lazy" style="width: 57%;">
+          </div>
+          <div>
+            <h3>Software Engineer</h3>
+            <p class="company-name">Intelcia Tech · Casablanca</p>
+            <span class="date">Novembre 2024 — Présent</span>
+          </div>
+        </div>
+        <ul>
+          <li>Développement de fonctionnalités métier pour des applications d'entreprise.</li>
+          <li>Participation aux migrations d'applications legacy et à la modernisation des interfaces.</li>
+          <li>Conception et automatisation de workflows métier.</li>
+          <li>Développement et optimisation de composants Oracle SQL/PLSQL au sein d'équipes Agile.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Oracle SQL/PLSQL</span>
+          <span class="tag">Modernisation</span>
+          <span class="tag">Workflows</span>
+          <span class="tag">Agile</span>
+        </div>
+      </article>
+
+      <article class="card job">
+        <div class="job-top">
+          <div class="company-logo sfr" aria-label="SFR">SFR</div>
+          <div>
+            <h3>Software Engineer</h3>
+            <p class="company-name">SFR</p>
+            <span class="date">Novembre 2024 — Présent</span>
+          </div>
+        </div>
+        <ul>
+          <li>Développement Oracle SQL/PLSQL pour des applications de télécommunications.</li>
+          <li>Automatisation de tâches opérationnelles avec des scripts UNIX Shell.</li>
+          <li>Évolutions fonctionnelles, corrections, tests, validation et déploiement.</li>
+          <li>Collaboration en environnement Agile avec Java, Spring Boot et Git.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Java</span>
+          <span class="tag">Spring Boot</span>
+          <span class="tag">UNIX Shell</span>
+          <span class="tag">Télécoms</span>
+        </div>
+      </article>
+
+      <article class="card job">
+        <div class="job-top">
+          <div class="company-logo">
+            <img src="images/shared-system.png" alt="Logo Shared System" loading="lazy">
+          </div>
+          <div>
+            <h3>Full Stack Developer & ML Engineer</h3>
+            <p class="company-name">Shared System · Casablanca</p>
+            <span class="date">Mars 2024 — Septembre 2024</span>
+          </div>
+        </div>
+        <ul>
+          <li>Développement d'une plateforme de gestion de courtage en assurance.</li>
+          <li>Intégration de techniques ML et NLP pour l'extraction d'informations.</li>
+          <li>Analyse et classification de documents pour simplifier les traitements métier.</li>
+          <li>Contribution à l'architecture, au développement, aux tests et au déploiement.</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Full Stack</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">NLP</span>
+          <span class="tag">Assurance</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS AVEC TES CAPTURES -->
+<section class="section" id="projets">
+  <div class="container">
+    <div class="projects-top">
+      <div class="section-head">
+        <span class="eyebrow">04 / Sélection de projets</span>
+        <h2>Des idées. Des interfaces.<br><span class="accent">Du concret.</span></h2>
+        <p>Clique sur une capture pour explorer le projet dans la galerie.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filtrer les projets">
+        <button type="button" class="filter" data-filter="all" aria-pressed="true">Tous</button>
+        <button type="button" class="filter" data-filter="web" aria-pressed="false">Web</button>
+        <button type="button" class="filter" data-filter="mobile" aria-pressed="false">Mobile</button>
+      </div>
+    </div>
+
+    <div class="project-grid">
+      <article class="project" data-category="mobile">
+        <button type="button" class="project-image mobile" data-gallery="home"
+          aria-label="Agrandir la capture Home Styler">
+          <img src="images/home-styler.png" alt="Interface mobile d'inscription Home Styler"
+            loading="lazy" data-project-image>
+          <span class="zoom" aria-hidden="true">
+            <svg class="icon"><use href="#zoom"></use></svg>
+          </span>
+        </button>
+        <div class="project-content">
+          <div class="project-type"><span>Interface mobile</span><span>01</span></div>
+          <div class="project-title">
+            <svg class="icon" aria-hidden="true"><use href="#phone"></use></svg>
+            <h3>Home Styler</h3>
+          </div>
+          <p>
+            Une interface mobile autour de l'aménagement intérieur,
+            avec un écran de création de compte et une identité visuelle dédiée.
+          </p>
+          <div class="tags">
+            <span class="tag">Mobile UI</span>
+            <span class="tag">Inscription</span>
+            <span class="tag">Interface</span>
+          </div>
+          <div class="project-footer">
+            <button type="button" class="gallery-button" data-gallery="home">
+              Voir le projet
+              <svg class="icon" aria-hidden="true"><use href="#arrow"></use></svg>
+            </button>
+            <small>1 capture</small>
+          </div>
+        </div>
+      </article>
+
+      <article class="project" data-category="web">
+        <button type="button" class="project-image face" data-gallery="attendance"
+          aria-label="Agrandir les captures de gestion de présence">
+          <img src="images/attendance.png" alt="Gestion de présence avec reconnaissance faciale"
+            loading="lazy" data-project-image>
+          <span class="zoom" aria-hidden="true">
+            <svg class="icon"><use href="#zoom"></use></svg>
+          </span>
+        </button>
+        <div class="project-content">
+          <div class="project-type"><span>Éducation & vision</span><span>02</span></div>
+          <div class="project-title">
+            <svg class="icon" aria-hidden="true"><use href="#face"></use></svg>
+            <h3>Gestion de présence</h3>
+          </div>
+          <p>
+            Une interface de gestion des étudiants et enseignants,
+            avec enregistrement des visages et écran de pointage par caméra.
+          </p>
+          <div class="tags">
+            <span class="tag">Reconnaissance faciale</span>
+            <span class="tag">Présence</span>
+            <span class="tag">Web</span>
+          </div>
+          <div class="project-footer">
+            <button type="button" class="gallery-button" data-gallery="attendance">
+              Voir le projet
+              <svg class="icon" aria-hidden="true"><use href="#arrow"></use></svg>
+            </button>
+            <small>2 captures</small>
+          </div>
+        </div>
+      </article>
+
+      <article class="project" data-category="web">
+        <button type="button" class="project-image docker" data-gallery="docker"
+          aria-label="Agrandir les captures Docker Management">
+          <img src="images/docker-dashboard.png" alt="Tableau de bord des conteneurs Docker"
+            loading="lazy" data-project-image>
+          <span class="zoom" aria-hidden="true">
+            <svg class="icon"><use href="#zoom"></use></svg>
+          </span>
+        </button>
+        <div class="project-content">
+          <div class="project-type"><span>Outils développeur</span><span>03</span></div>
+          <div class="project-title">
+            <svg class="icon" aria-hidden="true"><use href="#box"></use></svg>
+            <h3>Docker Management</h3>
+          </div>
+          <p>
+            Une interface web comprenant un écran de connexion et un
+            dashboard de conteneurs avec images, statuts et commandes de gestion.
+          </p>
+          <div class="tags">
+            <span class="tag">Docker</span>
+            <span class="tag">Dashboard</span>
+            <span class="tag">Conteneurs</span>
+          </div>
+          <div class="project-footer">
+            <button type="button" class="gallery-button" data-gallery="docker">
+              Voir le projet
+              <svg class="icon" aria-hidden="true"><use href="#arrow"></use></svg>
+            </button>
+            <small>2 captures</small>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FORMATION ET CERTIFICATIONS -->
+<section class="section" id="formation">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">05 / Apprentissage</span>
+      <h2>Formation & <span class="accent">certifications.</span></h2>
+    </div>
+
+    <div class="learning-grid">
+      <article class="card">
+        <div class="panel-title">
+          <svg class="icon" aria-hidden="true"><use href="#graduate"></use></svg>
+          <h3>Formation académique</h3>
+        </div>
+
+        <div class="education">
+          <span class="date">2022 — 2024</span>
+          <h4>Master — Computer and Internet Engineering</h4>
+          <p>Faculté des Sciences Aïn Chock</p>
+        </div>
+        <div class="education">
+          <span class="date">2019 — 2022</span>
+          <h4>Licence — Mathématiques et technologies de l'information</h4>
+          <p>Faculté des Sciences Aïn Chock · Bases de données</p>
+        </div>
+        <div class="education">
+          <span class="date">2017 — 2019</span>
+          <h4>Baccalauréat — Sciences physiques</h4>
+          <p>Lycée Othmane Ibnou Affane</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="panel-title">
+          <svg class="icon" aria-hidden="true"><use href="#award"></use></svg>
+          <h3>Certifications</h3>
+        </div>
+
+        <div class="certificate">
+          <div class="cert-logo">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"
+              alt="" loading="lazy">
+          </div>
+          <div><h4>React JS</h4><p>Développement frontend</p></div>
+        </div>
+
+        <div class="certificate">
+          <div class="cert-logo">
+         <img
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
+    alt="Amazon Web Services"
+    loading="lazy"
+  >
+          </div>
+          <div><h4>AWS Cloud Quest: Cloud Practitioner</h4><p>Fondamentaux du cloud</p></div>
+        </div>
+
+        <div class="certificate">
+          <div class="cert-logo security">
+               <img
+      src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg"
+      alt="Logo IBM"
+      loading="lazy"
+    >
+          </div>
+          <div><h4>Les fondamentaux de la cybersécurité</h4><p>Sécurité informatique</p></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-card">
+      <div>
+        <span class="eyebrow">06 / Restons en contact</span>
+        <h2>Construisons quelque chose<br>qui a du <span class="accent">sens.</span></h2>
+        <p>
+          Une opportunité en développement logiciel, un projet
+          à moderniser ou une intégration IA à imaginer ?
+          Échangeons.
+        </p>
+      </div>
+
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:ghizlaneaouzale12@gmail.com">
+          <svg class="icon" aria-hidden="true"><use href="#mail"></use></svg>
+          <div><small>Email</small><strong>ghizlaneaouzale12@gmail.com</strong></div>
+          <svg class="icon" aria-hidden="true"><use href="#arrow"></use></svg>
+        </a>
+
+        <a class="contact-link" href="https://www.linkedin.com/in/aouzal-ghizlane"
+          target="_blank" rel="noopener noreferrer">
+          <svg class="icon" aria-hidden="true"><use href="#linkedin"></use></svg>
+          <div><small>LinkedIn</small><strong>Aouzal Ghizlane</strong></div>
+          <svg class="icon" aria-hidden="true"><use href="#arrow"></use></svg>
+        </a>
+
+        <div class="contact-link">
+          <svg class="icon" aria-hidden="true"><use href="#pin"></use></svg>
+          <div><small>Localisation</small><strong>Casablanca, Maroc</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <a href="#accueil" class="brand">
+      <span class="brand-mark">AG</span>
+      
+    </a>
+    <p>© <span id="year"></span> Aouzal Ghizlane.</p>
+    <a href="#accueil" class="back">Retour en haut ↑</a>
+  </div>
+</footer>
+
+<!-- GALERIE DES CAPTURES -->
+<dialog id="gallery-dialog" aria-labelledby="gallery-title">
+  <div class="dialog-head">
+    <h2 id="gallery-title">Projet</h2>
+    <button type="button" class="icon-btn" id="gallery-close" aria-label="Fermer la galerie">
+      <svg class="icon" aria-hidden="true"><use href="#close"></use></svg>
+    </button>
+  </div>
+
+  <figure class="gallery-figure">
+    <img id="gallery-image" alt="">
+    <p id="gallery-error" hidden>
+      Image introuvable. Vérifie son nom et sa présence dans le dossier images.
+    </p>
+    <figcaption id="gallery-caption"></figcaption>
+  </figure>
+
+  <div class="gallery-controls">
+    <button type="button" class="icon-btn" id="gallery-prev" aria-label="Image précédente">
+      <svg class="icon" aria-hidden="true"><use href="#left"></use></svg>
+    </button>
+    <span id="gallery-counter" aria-live="polite"></span>
+    <button type="button" class="icon-btn" id="gallery-next" aria-label="Image suivante">
+      <svg class="icon" aria-hidden="true"><use href="#right"></use></svg>
+    </button>
+  </div>
+</dialog>
+
+<script>
+/* PRÉFÉRENCES */
+const root = document.documentElement;
+
+function save(key, value) {
+  try { localStorage.setItem(key, value); } catch {}
+}
+
+const themeButton = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
+
+function updateTheme() {
+  const dark = root.dataset.theme === "dark";
+  themeIcon.setAttribute("href", dark ? "#sun" : "#moon");
+  themeButton.setAttribute(
+    "aria-label",
+    dark ? "Passer au thème clair" : "Passer au thème sombre"
+  );
+}
+
+themeButton.addEventListener("click", () => {
+  root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+  save("ag-theme", root.dataset.theme);
+  updateTheme();
+});
+updateTheme();
+
+const swatches = document.querySelectorAll("[data-color-choice]");
+
+function updateColors() {
+  swatches.forEach(button => {
+    button.setAttribute(
+      "aria-pressed",
+      String(button.dataset.colorChoice === root.dataset.color)
+    );
+  });
+}
+
+swatches.forEach(button => {
+  button.addEventListener("click", () => {
+    root.dataset.color = button.dataset.colorChoice;
+    save("ag-color", root.dataset.color);
+    updateColors();
+  });
+});
+updateColors();
+
+/* MENU MOBILE */
+const menuButton = document.getElementById("menu-toggle");
+const navigation = document.getElementById("navigation");
+
+function closeMenu() {
+  navigation.classList.remove("open");
+  menuButton.setAttribute("aria-expanded", "false");
+  menuButton.setAttribute("aria-label", "Ouvrir le menu");
+}
+
+menuButton.addEventListener("click", () => {
+  const open = navigation.classList.toggle("open");
+  menuButton.setAttribute("aria-expanded", String(open));
+  menuButton.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+});
+
+navigation.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", closeMenu);
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && navigation.classList.contains("open")) {
+    closeMenu();
+    menuButton.focus();
+  }
+});
+
+/* LOGOS DES COMPÉTENCES */
+const skills = [
+  ["Java", "java/java-original.svg"],
+  ["Spring Boot", "spring/spring-original.svg"],
+  ["Angular", "angular/angular-original.svg"],
+  ["Python", "python/python-original.svg"],
+  ["Node.js", "nodejs/nodejs-original.svg"],
+  ["Django", "django/django-plain.svg"],
+  ["Flask", "flask/flask-original.svg"],
+  ["Oracle", "oracle/oracle-original.svg"],
+  ["Git", "git/git-original.svg"],
+  ["SonarQube", "sonarqube/sonarqube-original.svg"]
+];
+
+const skillGrid = document.getElementById("skill-grid");
+const logoBase = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/";
+
+skills.forEach(([name, file]) => {
+  const card = document.createElement("div");
+  card.className = "skill";
+
+  const logo = document.createElement("div");
+  logo.className = "skill-logo";
+
+  const image = document.createElement("img");
+  image.src = logoBase + file;
+  image.alt = "";
+  image.loading = "lazy";
+
+  image.addEventListener("error", () => {
+    image.hidden = true;
+    logo.textContent = name.slice(0, 2).toUpperCase();
+    logo.style.color = "#26334a";
+    logo.style.fontWeight = "800";
+  }, { once: true });
+
+  const label = document.createElement("span");
+  label.textContent = name;
+
+  logo.appendChild(image);
+  card.append(logo, label);
+  skillGrid.appendChild(card);
+});
+
+/* FILTRES DES PROJETS */
+const filters = document.querySelectorAll("[data-filter]");
+const projects = document.querySelectorAll(".project");
+
+filters.forEach(button => {
+  button.addEventListener("click", () => {
+    filters.forEach(item => {
+      item.setAttribute("aria-pressed", String(item === button));
+    });
+
+    projects.forEach(project => {
+      project.hidden =
+        button.dataset.filter !== "all" &&
+        project.dataset.category !== button.dataset.filter;
+    });
+  });
+});
+
+/* MESSAGE SI UNE CAPTURE LOCALE MANQUE */
+document.querySelectorAll("[data-project-image]").forEach(image => {
+  function showMissing() {
+    image.hidden = true;
+    const message = document.createElement("span");
+    message.className = "missing";
+    message.textContent =
+      "Ajoute cette capture dans le dossier : " + image.getAttribute("src");
+    image.parentElement.appendChild(message);
+  }
+
+  if (image.complete && image.naturalWidth === 0) {
+    showMissing();
+  } else {
+    image.addEventListener("error", showMissing, { once: true });
+  }
+});
+
+/* GALERIE */
+const galleries = {
+  home: {
+    title: "Home Styler",
+    images: [
+      {
+        src: "images/home-styler.png",
+        caption: "Interface mobile — création de compte"
+      }
+    ]
+  },
+  attendance: {
+    title: "Gestion de présence",
+    images: [
+      {
+        src: "images/attendance.png",
+        caption: "Écran de pointage par reconnaissance faciale"
+      },
+      {
+        src: "images/face-registration.png",
+        caption: "Enregistrement des visages"
+      }
+    ]
+  },
+  docker: {
+    title: "Docker Management",
+    images: [
+      {
+        src: "images/docker-dashboard.png",
+        caption: "Dashboard — gestion des conteneurs"
+      },
+      {
+        src: "images/docker-login.png",
+        caption: "Écran de connexion"
+      }
+    ]
+  }
+};
+
+const dialog = document.getElementById("gallery-dialog");
+const galleryImage = document.getElementById("gallery-image");
+const galleryError = document.getElementById("gallery-error");
+const galleryTitle = document.getElementById("gallery-title");
+const galleryCaption = document.getElementById("gallery-caption");
+const galleryCounter = document.getElementById("gallery-counter");
+const previousButton = document.getElementById("gallery-prev");
+const nextButton = document.getElementById("gallery-next");
+const closeButton = document.getElementById("gallery-close");
+
+let currentGallery = null;
+let currentIndex = 0;
+let lastTrigger = null;
+
+function renderGallery() {
+  const item = currentGallery.images[currentIndex];
+
+  galleryImage.hidden = false;
+  galleryError.hidden = true;
+  galleryImage.alt = item.caption;
+  galleryImage.src = item.src;
+
+  galleryTitle.textContent = currentGallery.title;
+  galleryCaption.textContent = item.caption;
+  galleryCounter.textContent =
+    `${currentIndex + 1} / ${currentGallery.images.length}`;
+
+  previousButton.disabled = currentIndex === 0;
+  nextButton.disabled = currentIndex === currentGallery.images.length - 1;
+}
+
+galleryImage.addEventListener("error", () => {
+  galleryImage.hidden = true;
+  galleryError.hidden = false;
+});
+
+galleryImage.addEventListener("load", () => {
+  galleryImage.hidden = false;
+  galleryError.hidden = true;
+});
+
+document.querySelectorAll("[data-gallery]").forEach(button => {
+  button.addEventListener("click", () => {
+    currentGallery = galleries[button.dataset.gallery];
+    currentIndex = 0;
+    lastTrigger = button;
+
+    renderGallery();
+    dialog.showModal();
+    document.body.classList.add("modal-open");
+  });
+});
+
+previousButton.addEventListener("click", () => {
+  if (currentIndex > 0) {
+    currentIndex--;
+    renderGallery();
+  }
+});
+
+nextButton.addEventListener("click", () => {
+  if (currentIndex < currentGallery.images.length - 1) {
+    currentIndex++;
+    renderGallery();
+  }
+});
+
+closeButton.addEventListener("click", () => dialog.close());
+
+dialog.addEventListener("close", () => {
+  document.body.classList.remove("modal-open");
+  if (lastTrigger) lastTrigger.focus();
+});
+
+dialog.addEventListener("click", event => {
+  if (event.target !== dialog) return;
+  const rect = dialog.getBoundingClientRect();
+  const outside =
+    event.clientX < rect.left || event.clientX > rect.right ||
+    event.clientY < rect.top || event.clientY > rect.bottom;
+  if (outside) dialog.close();
+});
+
+dialog.addEventListener("keydown", event => {
+  if (event.key === "ArrowLeft" && currentIndex > 0) {
+    event.preventDefault();
+    currentIndex--;
+    renderGallery();
+  }
+  if (
+    event.key === "ArrowRight" &&
+    currentIndex < currentGallery.images.length - 1
+  ) {
+    event.preventDefault();
+    currentIndex++;
+    renderGallery();
+  }
+});
+
+/* ANNÉE DU FOOTER */
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+<script>
+(() => {
+  "use strict";
+
+  /*
+   * Traductions du portfolio fourni.
+   * Les noms propres, adresses email, technologies et marques
+   * restent inchangés.
+   */
+  const translations = [
+    // Navigation et accessibilité
+    ["Aller au contenu", "Skip to content"],
+    ["Navigation principale", "Main navigation"],
+    ["À propos", "About"],
+    ["Compétences", "Skills"],
+    ["Expérience", "Experience"],
+    ["Projets", "Projects"],
+    ["Formation", "Education"],
+    ["Contact", "Contact"],
+    ["Langue du site", "Website language"],
+    ["Couleur du portfolio", "Portfolio color"],
+    ["Violet", "Purple"],
+    ["Bleu", "Blue"],
+    ["Vert", "Green"],
+    ["Passer au thème clair", "Switch to light mode"],
+    ["Passer au thème sombre", "Switch to dark mode"],
+    ["Ouvrir le menu", "Open menu"],
+    ["Fermer le menu", "Close menu"],
+
+    // Accueil
+    ["Casablanca, Maroc", "Casablanca, Morocco"],
+    ["Bonjour, je suis", "Hello, I'm"],
+    ["Full Stack & intégration IA", "Full Stack & AI Integration"],
+    [
+      "Je transforme les besoins métier en applications utiles : développement Java et Angular, modernisation de systèmes et solutions intelligentes avec Python et le NLP.",
+      "I turn business needs into useful applications through Java and Angular development, system modernization, and intelligent solutions with Python and NLP."
+    ],
+    ["Découvrir mes projets", "Explore my projects"],
+    ["Me contacter", "Contact me"],
+    ["Du code à l'impact", "From code to impact"],
+    ["Applications métier & IA", "Business applications & AI"],
+
+    // Domaines d'expertise
+    ["Développement Full Stack", "Full Stack Development"],
+    ["Intelligence artificielle", "Artificial Intelligence"],
+    [
+      "Python, NLP & recherche sémantique",
+      "Python, NLP & semantic search"
+    ],
+    [
+      "Modernisation & automatisation",
+      "Modernization & Automation"
+    ],
+    [
+      "Applications et processus métier",
+      "Business applications and workflows"
+    ],
+
+    // À propos
+    ["01 / Qui suis-je ?", "01 / About me"],
+    [
+      "La technique au service",
+      "Technology that serves"
+    ],
+    ["des", "real"],
+    ["besoins réels.", "business needs."],
+    [
+      "Ingénieure logiciel · Full Stack & AI",
+      "Software Engineer · Full Stack & AI"
+    ],
+    ["Télécommunications", "Telecommunications"],
+    ["Assurance", "Insurance"],
+    [
+      "Construire, moderniser et simplifier.",
+      "Build, modernize and simplify."
+    ],
+    [
+      "Ingénieure logiciel full-stack, j'interviens sur le développement et la modernisation d'applications d'entreprise dans les secteurs des télécommunications et de l'assurance.",
+      "As a full-stack software engineer, I develop and modernize enterprise applications in the telecommunications and insurance sectors."
+    ],
+    [
+      "Mon travail associe développement Java/Spring Boot, interfaces Angular, composants Oracle SQL/PLSQL et automatisation des workflows métier.",
+      "My work combines Java/Spring Boot development, Angular interfaces, Oracle SQL/PLSQL components, and business workflow automation."
+    ],
+    [
+      "Je travaille également sur l'IA appliquée : recherche sémantique avec MiniLM et RoBERTa, analyse documentaire et intégration de modèles via des API Flask.",
+      "I also work on applied AI: semantic search with MiniLM and RoBERTa, document analysis, and model integration through Flask APIs."
+    ],
+    ["Spécialité", "Specialization"],
+    ["Localisation", "Location"],
+    [
+      "Master en ingénierie informatique et Internet",
+      "Master's in Computer and Internet Engineering"
+    ],
+    ["Mon profil LinkedIn", "My LinkedIn profile"],
+
+    // Compétences
+    ["02 / Ma boîte à outils", "02 / My toolkit"],
+    ["Les technologies", "The technologies"],
+    ["que", "that"],
+    ["j'utilise.", "I use."],
+    [
+      "Du backend aux interfaces, des bases de données aux modèles d'IA : une approche transversale du développement logiciel.",
+      "From backend services to interfaces, and from databases to AI models: a cross-functional approach to software development."
+    ],
+    ["Modernisation", "Modernization"],
+
+    // Expérience
+    ["03 / Mon parcours", "03 / My journey"],
+    ["De l'expérience.", "Hands-on experience."],
+    ["Des", "Real"],
+    ["contributions.", "contributions."],
+    [
+      "Des applications d'entreprise, des processus métier et des solutions intelligentes.",
+      "Enterprise applications, business workflows, and intelligent solutions."
+    ],
+    [
+      "Novembre 2024 — Présent",
+      "November 2024 — Present"
+    ],
+    [
+      "Mars 2024 — Septembre 2024",
+      "March 2024 — September 2024"
+    ],
+    [
+      "Développement de fonctionnalités métier pour des applications d'entreprise.",
+      "Developed business features for enterprise applications."
+    ],
+    [
+      "Participation aux migrations d'applications legacy et à la modernisation des interfaces.",
+      "Contributed to legacy application migrations and interface modernization."
+    ],
+    [
+      "Conception et automatisation de workflows métier.",
+      "Designed and automated business workflows."
+    ],
+    [
+      "Développement et optimisation de composants Oracle SQL/PLSQL au sein d'équipes Agile.",
+      "Developed and optimized Oracle SQL/PLSQL components within Agile teams."
+    ],
+    [
+      "Développement Oracle SQL/PLSQL pour des applications de télécommunications.",
+      "Developed Oracle SQL/PLSQL solutions for telecommunications applications."
+    ],
+    [
+      "Automatisation de tâches opérationnelles avec des scripts UNIX Shell.",
+      "Automated operational tasks using UNIX Shell scripts."
+    ],
+    [
+      "Évolutions fonctionnelles, corrections, tests, validation et déploiement.",
+      "Delivered functional enhancements, fixes, testing, validation, and deployment."
+    ],
+    [
+      "Collaboration en environnement Agile avec Java, Spring Boot et Git.",
+      "Collaborated in an Agile environment using Java, Spring Boot, and Git."
+    ],
+    ["Télécoms", "Telecom"],
+    [
+      "Développement d'une plateforme de gestion de courtage en assurance.",
+      "Developed an insurance brokerage management platform."
+    ],
+    [
+      "Intégration de techniques ML et NLP pour l'extraction d'informations.",
+      "Integrated ML and NLP techniques for information extraction."
+    ],
+    [
+      "Analyse et classification de documents pour simplifier les traitements métier.",
+      "Analyzed and classified documents to streamline business processes."
+    ],
+    [
+      "Contribution à l'architecture, au développement, aux tests et au déploiement.",
+      "Contributed to architecture, development, testing, and deployment."
+    ],
+
+    // Projets
+    ["04 / Sélection de projets", "04 / Selected projects"],
+    [
+      "Des idées. Des interfaces.",
+      "Ideas. Interfaces."
+    ],
+    ["Du concret.", "Real applications."],
+    [
+      "Clique sur une capture pour explorer le projet dans la galerie.",
+      "Click a screenshot to explore the project in the gallery."
+    ],
+    ["Filtrer les projets", "Filter projects"],
+    ["Tous", "All"],
+    ["Interface mobile", "Mobile interface"],
+    [
+      "Agrandir la capture Home Styler",
+      "Enlarge the Home Styler screenshot"
+    ],
+    [
+      "Interface mobile d'inscription Home Styler",
+      "Home Styler mobile registration interface"
+    ],
+    [
+      "Une interface mobile autour de l'aménagement intérieur, avec un écran de création de compte et une identité visuelle dédiée.",
+      "A mobile interface for interior design, featuring an account registration screen and a dedicated visual identity."
+    ],
+    ["Inscription", "Registration"],
+    ["Voir le projet", "View project"],
+    ["1 capture", "1 screenshot"],
+    ["2 captures", "2 screenshots"],
+    ["Éducation & vision", "Education & Vision"],
+    ["Gestion de présence", "Attendance Management"],
+    [
+      "Agrandir les captures de gestion de présence",
+      "Enlarge the attendance management screenshots"
+    ],
+    [
+      "Gestion de présence avec reconnaissance faciale",
+      "Attendance management with facial recognition"
+    ],
+    [
+      "Une interface de gestion des étudiants et enseignants, avec enregistrement des visages et écran de pointage par caméra.",
+      "A student and teacher management interface with face registration and a camera-based attendance screen."
+    ],
+    ["Reconnaissance faciale", "Facial recognition"],
+    ["Présence", "Attendance"],
+    ["Outils développeur", "Developer Tools"],
+    [
+      "Agrandir les captures Docker Management",
+      "Enlarge the Docker Management screenshots"
+    ],
+    [
+      "Tableau de bord des conteneurs Docker",
+      "Docker container dashboard"
+    ],
+    [
+      "Une interface web comprenant un écran de connexion et un dashboard de conteneurs avec images, statuts et commandes de gestion.",
+      "A web interface featuring a login screen and a container dashboard with images, statuses, and management controls."
+    ],
+    ["Conteneurs", "Containers"],
+
+    // Formation
+    ["05 / Apprentissage", "05 / Learning"],
+    ["Formation &", "Education &"],
+    ["certifications.", "certifications."],
+    ["Formation académique", "Education"],
+    [
+      "Master — Computer and Internet Engineering",
+      "Master's Degree — Computer and Internet Engineering"
+    ],
+    [
+      "Licence — Mathématiques et technologies de l'information",
+      "Bachelor's Degree — Mathematics and Information Technology"
+    ],
+    [
+      "Faculté des Sciences Aïn Chock",
+      "Aïn Chock Faculty of Sciences"
+    ],
+    [
+      "Faculté des Sciences Aïn Chock · Bases de données",
+      "Aïn Chock Faculty of Sciences · Databases"
+    ],
+    [
+      "Baccalauréat — Sciences physiques",
+      "High School Diploma — Physical Sciences"
+    ],
+    [
+      "Lycée Othmane Ibnou Affane",
+      "Othmane Ibnou Affane High School"
+    ],
+    ["Développement frontend", "Frontend development"],
+    ["Fondamentaux du cloud", "Cloud fundamentals"],
+    [
+      "Les fondamentaux de la cybersécurité",
+      "Cybersecurity Fundamentals"
+    ],
+    ["Sécurité informatique", "Information security"],
+
+    // Contact et pied de page
+    ["06 / Restons en contact", "06 / Let's connect"],
+    [
+      "Construisons quelque chose",
+      "Let's build something"
+    ],
+    ["qui a du", "with"],
+    ["sens.", "purpose."],
+    [
+      "Une opportunité en développement logiciel, un projet à moderniser ou une intégration IA à imaginer ? Échangeons.",
+      "A software engineering opportunity, an application to modernize, or an AI integration challenge? Let's talk."
+    ],
+    ["Retour en haut ↑", "Back to top ↑"],
+
+    // Galerie : titres, légendes et commandes
+    ["Projet", "Project"],
+    ["Fermer la galerie", "Close gallery"],
+    ["Image précédente", "Previous image"],
+    ["Image suivante", "Next image"],
+    [
+      "Image introuvable. Vérifie son nom et sa présence dans le dossier images.",
+      "Image not found. Check its filename and make sure it is in the images folder."
+    ],
+    [
+      "Interface mobile — création de compte",
+      "Mobile interface — account registration"
+    ],
+    [
+      "Écran de pointage par reconnaissance faciale",
+      "Facial recognition attendance screen"
+    ],
+    [
+      "Enregistrement des visages",
+      "Face registration"
+    ],
+    [
+      "Dashboard — gestion des conteneurs",
+      "Dashboard — container management"
+    ],
+    ["Écran de connexion", "Login screen"],
+
+    // Logos
+    ["Logo Intelcia", "Intelcia logo"],
+    ["Logo Shared System", "Shared System logo"],
+    ["Logo IBM", "IBM logo"]
+  ];
+
+  const normalize = value =>
+    value.replace(/\s+/g, " ").trim();
+
+  const frenchToEnglish = new Map(
+    translations.map(([fr, en]) => [normalize(fr), en])
+  );
+
+  const englishToFrench = new Map(
+    translations.map(([fr, en]) => [normalize(en), fr])
+  );
+
+  let language = "fr";
+
+  try {
+    const saved = localStorage.getItem("ag-language");
+    if (saved === "fr" || saved === "en") {
+      language = saved;
+    }
+  } catch {}
+
+  /*
+   * Conserver la version française des textes connus.
+   * Cela permet de revenir fidèlement au texte d'origine.
+   */
+  const originalTexts = new WeakMap();
+  const originalAttributes = new WeakMap();
+
+  const missingPrefixes = {
+    fr: "Ajoute cette capture dans le dossier : ",
+    en: "Add this screenshot to the folder: "
+  };
+
+  function translateValue(value, sourceFrench = null) {
+    const normalized = normalize(value);
+
+    if (!normalized) return value;
+
+    let replacement;
+
+    if (sourceFrench !== null) {
+      replacement = language === "fr"
+        ? sourceFrench
+        : frenchToEnglish.get(normalize(sourceFrench));
+    } else if (language === "en") {
+      replacement = frenchToEnglish.get(normalized);
+    } else {
+      replacement = englishToFrench.get(normalized);
+    }
+
+    // Messages contenant un chemin de fichier variable.
+    if (replacement === undefined) {
+      const frPrefix = missingPrefixes.fr;
+      const enPrefix = missingPrefixes.en;
+
+      if (normalized.startsWith(frPrefix)) {
+        replacement =
+          missingPrefixes[language] +
+          normalized.slice(frPrefix.length);
+      } else if (normalized.startsWith(enPrefix)) {
+        replacement =
+          missingPrefixes[language] +
+          normalized.slice(enPrefix.length);
+      }
+    }
+
+    if (replacement === undefined) return value;
+
+    // Préserver les espaces autour du texte et les icônes voisines.
+    const leading = value.match(/^\s*/)[0];
+    const trailing = value.match(/\s*$/)[0];
+
+    return leading + replacement + trailing;
+  }
+
+  function translateTextNode(node) {
+    const value = node.nodeValue;
+    const normalized = normalize(value);
+
+    if (!normalized) return;
+
+    let original = originalTexts.get(node);
+
+    if (frenchToEnglish.has(normalized)) {
+      original = normalized;
+      originalTexts.set(node, original);
+    } else if (
+      original &&
+      normalized !== normalize(original) &&
+      normalized !== normalize(frenchToEnglish.get(original) || "")
+    ) {
+      // Un script existant a changé ce texte.
+      originalTexts.delete(node);
+      original = undefined;
+    }
+
+    const translated = translateValue(
+      value,
+      original === undefined ? null : original
+    );
+
+    if (translated !== value) {
+      node.nodeValue = translated;
+    }
+  }
+
+  function translateAttribute(element, attribute) {
+    const value = element.getAttribute(attribute);
+
+    if (!value) return;
+
+    const normalized = normalize(value);
+    let saved = originalAttributes.get(element);
+
+    if (!saved) {
+      saved = {};
+      originalAttributes.set(element, saved);
+    }
+
+    if (frenchToEnglish.has(normalized)) {
+      saved[attribute] = normalized;
+    } else if (
+      saved[attribute] &&
+      normalized !== normalize(saved[attribute]) &&
+      normalized !== normalize(
+        frenchToEnglish.get(saved[attribute]) || ""
+      )
+    ) {
+      delete saved[attribute];
+    }
+
+    const translated = translateValue(
+      value,
+      saved[attribute] ?? null
+    );
+
+    if (translated !== value) {
+      element.setAttribute(attribute, translated);
+    }
+  }
+
+  function translatePage() {
+    document.documentElement.lang = language;
+
+    /*
+     * Ne pas modifier :
+     * - le JavaScript ;
+     * - le CSS ;
+     * - les extraits de code ;
+     * - les boutons FR et EN.
+     */
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode(node) {
+          if (!normalize(node.nodeValue)) {
+            return NodeFilter.FILTER_REJECT;
+          }
+
+          if (
+            node.parentElement?.closest(
+              "script, style, pre, code, noscript, " +
+              ".language-switch, [data-no-translate]"
+            )
+          ) {
+            return NodeFilter.FILTER_REJECT;
+          }
+
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      }
+    );
+
+    let node;
+
+    while ((node = walker.nextNode())) {
+      translateTextNode(node);
+    }
+
+    // Traduire aussi les textes d'accessibilité.
+    document.querySelectorAll(
+      "[aria-label], [alt], [title], [placeholder]"
+    ).forEach(element => {
+      if (
+        element.closest(
+          ".language-switch, script, style, [data-no-translate]"
+        )
+      ) {
+        return;
+      }
+
+      ["aria-label", "alt", "title", "placeholder"].forEach(attribute => {
+        if (element.hasAttribute(attribute)) {
+          translateAttribute(element, attribute);
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-language]").forEach(button => {
+      const active = button.dataset.language === language;
+
+      button.setAttribute("aria-pressed", String(active));
+
+      if (active) {
+        button.setAttribute("aria-current", "true");
+      } else {
+        button.removeAttribute("aria-current");
+      }
+    });
+
+    document.title = language === "fr"
+      ? "Aouzal Ghizlane | Ingénieure logiciel"
+      : "Aouzal Ghizlane | Software Engineer";
+
+    const description = document.querySelector(
+      'meta[name="description"]'
+    );
+
+    if (description) {
+      description.content = language === "fr"
+        ? "Aouzal Ghizlane — Ingénieure logiciel à Casablanca. Java, Spring Boot, Angular, Python et intégration IA."
+        : "Aouzal Ghizlane — Software Engineer in Casablanca. Java, Spring Boot, Angular, Python and AI integration.";
+    }
+  }
+
+  /*
+   * Surveiller les textes modifiés par le script existant :
+   * galerie, thème, menu et messages d'images manquantes.
+   */
+  const observer = new MutationObserver(scheduleTranslation);
+  let scheduled = false;
+
+  const observerOptions = {
+    subtree: true,
+    childList: true,
+    characterData: true,
+    attributes: true,
+    attributeFilter: [
+      "aria-label",
+      "alt",
+      "title",
+      "placeholder"
+    ]
+  };
+
+  function scheduleTranslation() {
+    if (scheduled) return;
+
+    scheduled = true;
+
+    requestAnimationFrame(() => {
+      scheduled = false;
+
+      // Éviter que nos propres traductions déclenchent une boucle.
+      observer.disconnect();
+      translatePage();
+      observer.observe(document.body, observerOptions);
+    });
+  }
+
+  document.querySelectorAll("[data-language]").forEach(button => {
+    button.addEventListener("click", () => {
+      const selected = button.dataset.language;
+
+      if (!["fr", "en"].includes(selected)) return;
+
+      language = selected;
+
+      try {
+        localStorage.setItem("ag-language", language);
+      } catch {}
+
+      observer.disconnect();
+      translatePage();
+      observer.observe(document.body, observerOptions);
+    });
+  });
+
+  translatePage();
+  observer.observe(document.body, observerOptions);
+})();
+</script>
+
+</body>
+</html>
